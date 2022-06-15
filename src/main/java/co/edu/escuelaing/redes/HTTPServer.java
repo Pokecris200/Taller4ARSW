@@ -92,10 +92,10 @@ public class HTTPServer {
     
     private String readFile(String path){
         String s = "";
-        String p = "C:\\Users\\cristian.forero-m\\Documents\\NetBeansProjects\\Redes\\src\\main\\resources\\";
+        String p = "..\\src\\main\\resources\\";
         try{    
             if(path.equals("/")){
-                p += "\\\\index.html";
+                p += "\\index.html";
             }
             else {
                 p += path;

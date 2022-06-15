@@ -4,28 +4,18 @@ Virtual Host
 
 ## Descipción
 
-Este repositorio contiene un programa en Java que permite calcular la media y la desviación estandar de un archivo de texto con valores
-
-## Diseño
+Este repositorio contiene un programa en Java que ejecuta un host virtual que contiene una pagina web
 
 ### Resumen
 
-El objetivo del programa es realiar el calculo de dos medidas estadísticas muy usadas en analisis, por lo que pensé que la mejor idea era dividir este programa en 2 partes
-* El componente calculatorio
-* El componente de estructura
+El virtual Host esta fundamentado en el desarrollo que se trabajo en clase, haciendo una adaptación de tal manera que se puedan buscar y mostar un recurso dependiendo de la url
+Por Ejemplo:
 
-Así se tiene que el diseño queda tal que así
-![Diagrama de Paquetes](img/paquetes.png)
+´´´
+http://127.0.0.1/index.html
+´´´
+busca el recurso index.html del host
 
-* Paquete LinkedList
-
-
-![Paquete LL](img/clasesllist.png)
-
-* Paquete MeanAndSD
-
-
-![Paquete Calc](img/clasesStadistic.png)
 
 ## Autor
 
