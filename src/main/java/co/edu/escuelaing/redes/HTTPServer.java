@@ -57,7 +57,7 @@ public class HTTPServer {
                 p += "\\index.html";
             }
             else {
-                p += path;
+                p += path.replace("/", "\\");
             }
             File outputFile = new File(p); //"..\\src\\main\\resources\\index.html"
             Scanner scan = new Scanner(outputFile);
