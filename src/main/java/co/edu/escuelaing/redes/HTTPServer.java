@@ -53,7 +53,7 @@ public class HTTPServer {
         String s = "";
         String p = "src\\main\\resources\\";
         try{    
-            if(path.equals("/")){
+            if(path.equals("/") || path.equals("")){
                 p += "\\index.html";
             }
             else {
