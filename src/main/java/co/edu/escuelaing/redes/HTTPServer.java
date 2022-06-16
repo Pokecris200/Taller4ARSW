@@ -18,7 +18,7 @@ public class HTTPServer {
         return _instance;
     }
     
-    public static void main(String[] args) {
+    public static void start() {
         
         boolean run = true;
         while(run){
@@ -51,7 +51,7 @@ public class HTTPServer {
     
     public String readFile(String path){
         String s = "";
-        String p = "src\\main\\resources\\";
+        String p = "target\\classes\\";
         try{    
             if(path.equals("/") || path.equals("")){
                 p += "index.html";
@@ -76,6 +76,32 @@ public class HTTPServer {
         System.out.println(s); 
         return s;
         
+    }
+    
+    private String files(File f, Socket skt, Scanner scan){
+        String s = "";
+        s = "HTTP/1.1 200 OK\r\n"
+                    + "Content-Type: text/html\r\n"
+                    + "\r\n";
+        while( scan.hasNext()){
+                s += " " + scan.next();
+            }
+        return s;
+    }
+    
+    private String media(File f, Socket skt, Scanner scan, String t){
+        String s = "";
+        byte[] bit = null;
+        try{
+            FileInputStream fis = new FileInputStream(f);
+        }catch(Exception e){
+            bit = new byte[0];
+        }
+        s = "HTTP/1.1 200 OK\r\n"
+                + "Content-Type: image/" + t + "\r\n"
+                + "Content-Length: " + bit.length + "\r\n"
+                + "\r\n";
+        return null;
     }
     
     private int getPort(){
