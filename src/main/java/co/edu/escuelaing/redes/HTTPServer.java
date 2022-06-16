@@ -54,10 +54,10 @@ public class HTTPServer {
         String p = "src\\main\\resources\\";
         try{    
             if(path.equals("/") || path.equals("")){
-                p += "\\index.html";
+                p += "index.html";
             }
             else {
-                p += path.replace("/", "\\");
+                p += path.replace("/", "");
             }
             File outputFile = new File(p); //"..\\src\\main\\resources\\index.html"
             Scanner scan = new Scanner(outputFile);
