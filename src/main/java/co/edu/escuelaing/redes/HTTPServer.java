@@ -49,7 +49,7 @@ public class HTTPServer {
         }
     }
     
-    public String readFile(String path){
+    public String readFile(String path, Socket cs){
         String s = "";
         String p = "target\\classes\\";
         try{    
@@ -61,11 +61,17 @@ public class HTTPServer {
             }
             File outputFile = new File(p); //"..\\src\\main\\resources\\index.html"
             Scanner scan = new Scanner(outputFile);
-            if (p.contains(".html")){
+            if (p.contains(".htm") || p.contains(".js") || p.contains(".css")) {
+            	s = files(outputFile, cs, scan, p);
+            }
+            else if (p.contains(".jpg") || p.contains(".png") || p.contains(".jpeg") || p.contains(".gif")) {
+            	s = media(outputFile, cs, scan, p);
+            }
+            /*if (p.contains(".html")){
                 s = "HTTP/1.1 200 OK\r\n"
                     + "Content-Type: text/html\r\n"
                     + "\r\n";
-            }
+            }*/
             while( scan.hasNext()){
                 s += " " + scan.next();
             }
@@ -78,10 +84,10 @@ public class HTTPServer {
         
     }
     
-    private String files(File f, Socket skt, Scanner scan){
+    private String files(File f, Socket skt, Scanner scan, String p){
         String s = "";
         s = "HTTP/1.1 200 OK\r\n"
-                    + "Content-Type: text/html\r\n"
+                    + "Content-Type: text/"+ p.substring(p.indexOf("."))+"\r\n"
                     + "\r\n";
         while( scan.hasNext()){
                 s += " " + scan.next();
@@ -89,7 +95,7 @@ public class HTTPServer {
         return s;
     }
     
-    private String media(File f, Socket skt, Scanner scan, String t){
+    private String media(File f, Socket skt, Scanner scan, String p){
         String s = "";
         byte[] bit = null;
         try{
@@ -98,10 +104,10 @@ public class HTTPServer {
             bit = new byte[0];
         }
         s = "HTTP/1.1 200 OK\r\n"
-                + "Content-Type: image/" + t + "\r\n"
+                + "Content-Type: image/" + p.substring(p.indexOf(".")) + "\r\n"
                 + "Content-Length: " + bit.length + "\r\n"
                 + "\r\n";
-        return null;
+        return s;
     }
     
     private int getPort(){

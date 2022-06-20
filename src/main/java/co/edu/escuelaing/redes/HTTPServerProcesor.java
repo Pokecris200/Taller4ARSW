@@ -53,7 +53,7 @@ public class HTTPServerProcesor {
                     + "</body>"
                     + "</html>" + inputLine;*/
             
-            outputLine = HTTPServer.getInstance().readFile(path);
+            outputLine = HTTPServer.getInstance().readFile(path, clientSocket);
 
             out.println(outputLine);
 
