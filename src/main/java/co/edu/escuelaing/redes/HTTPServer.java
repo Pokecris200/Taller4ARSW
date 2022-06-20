@@ -51,7 +51,7 @@ public class HTTPServer {
     
     public String readFile(String path, Socket cs){
         String s = "";
-        String p = ".\\target\\classes\\";
+        String p = "\\target\\classes\\";
         try{    
             if(path.equals("/") || path.equals("")){
                 p += "index.html";
@@ -86,7 +86,7 @@ public class HTTPServer {
     
     private String files(File f, Socket skt, Scanner scan, String p){
         String s = "";
-        p = p.substring(2);
+        //p = p.substring(2);
         s = "HTTP/1.1 200 OK\r\n"
                     + "Content-Type: text/"+ p.substring(p.indexOf(".") +1)+"\r\n"
                     + "\r\n";
