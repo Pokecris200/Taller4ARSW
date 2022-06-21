@@ -22,11 +22,13 @@ public class ThreadWebClient implements Runnable{
 		    if (running) {
 		        HTTPServerProcesor.process(cliSocket);
 		    }
+		    cliSocket.close();
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-        cliSocket.close();
+        
 
     }
+	
 	
 }
