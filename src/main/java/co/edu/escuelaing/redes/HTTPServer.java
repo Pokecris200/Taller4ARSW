@@ -72,6 +72,9 @@ public class HTTPServer {
                 s += " " + scan.next();
             }
         }
+        catch (FileNotFoundException e) {
+			s = fail(404);
+		}
         catch(Exception e){
             e.printStackTrace();
         }
@@ -113,5 +116,19 @@ public class HTTPServer {
         }
         return 36000;
         
+    }
+    
+    private String fail(int n) {
+    	String s = "";
+        if (n == 404) {
+            s = "HTTP/1.1 404 Not Found\r\n\r\n"
+                    + "<!DOCTYPE html>"
+                    + "<html>"
+                    + "<h1>404 El Recurso no está disponible</h1>"
+                    + "<br></br>"
+                    + "<img src=https://c.tenor.com/sjnrOgJ_uagAAAAC/cute-cat-crying.gif>"
+                    + "</html>";
+        }
+    	return s;
     }
 }
