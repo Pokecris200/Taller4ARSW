@@ -61,6 +61,7 @@ public class HTTPServer {
             }
             File outputFile = new File(p); //"..\\src\\main\\resources\\index.html"
             Scanner scan = new Scanner(outputFile);
+            System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++" + outputFile.exists());
             if (p.contains(".htm") || p.contains(".js") || p.contains(".css")) {
             	s = files(outputFile, cs, scan, p);
             }
@@ -86,7 +87,6 @@ public class HTTPServer {
     
     private String files(File f, Socket skt, Scanner scan, String p){
         String s = "";
-        //p = p.substring(2);
         s = "HTTP/1.1 200 OK\r\n"
                     + "Content-Type: text/"+ p.substring(p.indexOf(".") +1)+"\r\n"
                     + "\r\n";
