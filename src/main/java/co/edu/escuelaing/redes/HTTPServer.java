@@ -124,7 +124,7 @@ public class HTTPServer {
             s = "HTTP/1.1 404 Not Found\r\n\r\n"
                     + "<!DOCTYPE html>"
                     + "<html>"
-                    + "<h1>404 El Recurso no está disponible</h1>"
+                    + "<h1>404 El Recurso no esta disponible</h1>"
                     + "<br></br>"
                     + "<img src=https://c.tenor.com/sjnrOgJ_uagAAAAC/cute-cat-crying.gif>"
                     + "</html>";
