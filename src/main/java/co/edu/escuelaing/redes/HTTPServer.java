@@ -4,6 +4,7 @@ package co.edu.escuelaing.redes;
 import java.net.*;
 import java.io.*;
 import java.util.Scanner;
+import java.util.concurrent.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 /**
@@ -12,41 +13,39 @@ import java.util.logging.Logger;
  */
 public class HTTPServer {
     
+	//Instancia de la clase
     private static HTTPServer _instance = new HTTPServer();
+    
+    //Condicion de carrera
+    private static boolean run = true;
 
     public static HTTPServer getInstance() {
         return _instance;
     }
     
+    /**
+     * Inicia el servidor web
+     */
     public static void start() {
-        
-        boolean run = true;
-        while(run){
-            ServerSocket serverSocket = null;
-            try {
-                serverSocket = new ServerSocket(_instance.getPort());
-            } catch (IOException e) {
-                System.err.println("Could not listen on port: 35000.");
-                System.exit(1);
-            }
-            Socket clientSocket = null;
-            try {
-                System.out.println("Listo para recibir ...");
-                clientSocket = serverSocket.accept();
-            } catch (IOException e) {
-                System.err.println("Accept failed.");
-                System.exit(1);
-            }
-            try {
-                HTTPServerProcesor.process(clientSocket);
-                serverSocket.close();
-            } catch (IOException ex) {
-                Logger.getLogger(HTTPServer.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (URISyntaxException ex) {
-                Logger.getLogger(HTTPServer.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
+    	ExecutorService threadPool = Executors.newFixedThreadPool(8);
+        ServerSocket serverSocket = null;
+        try {
+        	serverSocket = new ServerSocket(_instance.getPort());
+	        Socket clientSocket = null;
+            System.out.println("Listo para recibir ...");
+            clientSocket = serverSocket.accept();
+	        try {
+	            HTTPServerProcesor.process(clientSocket);
+	            serverSocket.close();
+	        } catch (URISyntaxException ex) {
+	            Logger.getLogger(HTTPServer.class.getName()).log(Level.SEVERE, null, ex);
+	        } 
         }
+        catch (IOException ex) {
+            Logger.getLogger(HTTPServer.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+            
+        
     }
     
     public String readFile(String path, Socket cs){
