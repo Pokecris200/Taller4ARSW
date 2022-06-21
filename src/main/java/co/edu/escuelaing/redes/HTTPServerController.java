@@ -11,29 +11,13 @@ import java.util.concurrent.*;
  * @author cristian.forero-m
  */
 public class HTTPServerController {
-    public static void main(String[] args) {
-    	int nHilos = Integer.parseInt(args[0]);
-    	ExecutorService threadPool = Executors.newFixedThreadPool(8);
+	public static void main(String[] args) {
         HTTPServer server = HTTPServer.getInstance();
-        while(nHilos > 0) {
-        	nHilos--;
-        	ThreadProcesor tProcessor = new ThreadProcesor(getPort());
-        	threadPool.execute(tProcessor);
+        try {
+            server.start();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        threadPool.shutdown();
     }
-    
-    /**
-     * Retorna el puerto activo en la variable de sistema
-     * @return Puerto Activo para el cliente
-     */
-    private static int getPort(){
-        if (System.getenv("PORT") != null){
-            return Integer.parseInt(System.getenv("PORT"));
-        }
-        return 36000;
-        
-    }
-    
     
 }
