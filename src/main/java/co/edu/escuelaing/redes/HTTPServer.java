@@ -51,7 +51,7 @@ public class HTTPServer {
     
     public String readFile(String path, Socket cs){
         String s = "";
-        String p = "\\target\\classes\\";
+        String p = "target\\classes\\";
         try{    
             if(path.equals("/") || path.equals("")){
                 p += "index.html";
@@ -59,7 +59,7 @@ public class HTTPServer {
             else {
                 p += path.replace("/", "");
             }
-            File outputFile = new File(p); //"..\\src\\main\\resources\\index.html"
+            File outputFile = new File(p); 
             Scanner scan = new Scanner(outputFile);
             System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++" + outputFile.exists());
             if (p.contains(".htm") || p.contains(".js") || p.contains(".css")) {
@@ -68,11 +68,6 @@ public class HTTPServer {
             else if (p.contains(".jpg") || p.contains(".png") || p.contains(".jpeg") || p.contains(".gif")) {
             	s = media(outputFile, cs, scan, p);
             }
-            /*if (p.contains(".html")){
-                s = "HTTP/1.1 200 OK\r\n"
-                    + "Content-Type: text/html\r\n"
-                    + "\r\n";
-            }*/
             while( scan.hasNext()){
                 s += " " + scan.next();
             }
@@ -87,8 +82,9 @@ public class HTTPServer {
     
     private String files(File f, Socket skt, Scanner scan, String p){
         String s = "";
+        String ext = (p.substring(p.indexOf(".") +1).equals("js")) ? "javascript": p.substring(p.indexOf(".") +1);
         s = "HTTP/1.1 200 OK\r\n"
-                    + "Content-Type: text/"+ p.substring(p.indexOf(".") +1)+"\r\n"
+                    + "Content-Type: text/"+ ext +"\r\n"
                     + "\r\n";
         while( scan.hasNext()){
                 s += " " + scan.next();

@@ -1,7 +1,2 @@
 
-function roll() {
-  
-  document.getElementById("rick").style.visibility = "visible";
-  
-}
-
+alert('Esto no es un virus ;3')
