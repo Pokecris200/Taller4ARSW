@@ -27,24 +27,26 @@ public class HTTPServer {
      * Inicia el servidor web
      */
     public static void start() {
-    	ExecutorService threadPool = Executors.newFixedThreadPool(8);
-        ServerSocket serverSocket = null;
-        try {
-        	serverSocket = new ServerSocket(_instance.getPort());
-	        Socket clientSocket = null;
-            System.out.println("Listo para recibir ...");
-            clientSocket = serverSocket.accept();
+    	while(run)
+    	{
+	    	ExecutorService threadPool = Executors.newFixedThreadPool(8);
+	        ServerSocket serverSocket = null;
 	        try {
-	            HTTPServerProcesor.process(clientSocket);
-	            serverSocket.close();
-	        } catch (URISyntaxException ex) {
+	        	serverSocket = new ServerSocket(_instance.getPort());
+		        Socket clientSocket = null;
+	            System.out.println("Listo para recibir ...");
+	            clientSocket = serverSocket.accept();
+		        try {
+		            HTTPServerProcesor.process(clientSocket);
+		            serverSocket.close();
+		        } catch (URISyntaxException ex) {
+		            Logger.getLogger(HTTPServer.class.getName()).log(Level.SEVERE, null, ex);
+		        } 
+	        }
+	        catch (IOException ex) {
 	            Logger.getLogger(HTTPServer.class.getName()).log(Level.SEVERE, null, ex);
 	        } 
-        }
-        catch (IOException ex) {
-            Logger.getLogger(HTTPServer.class.getName()).log(Level.SEVERE, null, ex);
-        } 
-            
+    	}
         
     }
     
