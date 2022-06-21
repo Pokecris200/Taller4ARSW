@@ -37,22 +37,7 @@ public class HTTPServerProcesor {
                 }
             }
             
-            
-            /*outputLine = "HTTP/1.1 200 OK\r\n"
-                    + "Content-Type: text/html\r\n"
-                    + "\r\n"
-                    + "<!DOCTYPE html>"
-                    + "<html>"
-                    + "<head>"
-                    + "<meta charset=\"UTF-8\">"
-                    + "<title>Title of the document</title>\n" + "</head>"
-                    + "<body>"
-                    + "My Web Site"
-                    + "<br></br>"
-                    + "<img src=\"https://m.media-amazon.com/images/I/61Y8VHcrPXL._AC_SX425_.jpg\" alt=\"Turtwig\">"
-                    + "</body>"
-                    + "</html>" + inputLine;*/
-            
+              
             outputLine = HTTPServer.getInstance().readFile(path, clientSocket);
 
             out.println(outputLine);

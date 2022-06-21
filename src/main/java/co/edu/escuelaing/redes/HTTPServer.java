@@ -61,7 +61,6 @@ public class HTTPServer {
             }
             File outputFile = new File(p); 
             Scanner scan = new Scanner(outputFile);
-            System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++" + outputFile.exists());
             if (p.contains(".htm") || p.contains(".js") || p.contains(".css")) {
             	s = files(outputFile, cs, scan, p);
             }
